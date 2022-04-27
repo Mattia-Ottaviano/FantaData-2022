@@ -12,4 +12,41 @@
         {{listaGioc|safe}}
     </p>
 </body>
+
+<form action="/sceltasquadra" method = "GET">
+    <h1>Seleziona Squadra:</h1>
+    <select name="squadra">
+        {% for squadra in squadre%}
+        <option value="{{squadra}}" >{{squadra}}</option>
+        {%endfor%}
+    </select>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+
+<form action="/ordinaper" method = "GET">
+    <h1>Seleziona Criterio d'ordine:</h1>
+    <select name="ordina">
+        {% for criterio in criteri%}
+        <option value="{{criterio}}" >{{criterio}}</option>
+        {%endfor%}
+    </select>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+
+<form action="/radiobuttons">
+    <h1>Seleziona Ruolo:</h1>
+    <input type="radio" name="scelta" value="AllRoles">Tutti</input><br>
+    <input type="radio" name="scelta" value="P">P</input><br>
+    <input type="radio" name="scelta" value="D">D</input><br>
+    <input type="radio" name="scelta" value="C">C</input><br>
+    <input type="radio" name="scelta" value="A">A</input><br>
+
+
+    <input type="submit" value="Clicca qui"></input>
+</form>
+
+<form action="/input">
+    <input type="text" value="Nome giocatore:" name='calciatore'></input>
+    <input type="submit" value="Clicca qui"></input>
+</form>
 </html>
