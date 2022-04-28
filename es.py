@@ -11,11 +11,11 @@ import pandas as pd
 #matplotlib.use('Agg')
 #import matplotlib.pyplot as plt
 
-lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = ['Tutti'])
-lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = ['Portieri'])
-lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = ['Difensori'])
-lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = ['Centrocampisti'])
-lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = ['Attaccanti'])
+lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Tutti')
+lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Portieri')
+lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Difensori')
+lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Centrocampisti')
+lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Attaccanti')
 print(lstDif)
 
 @app.route("/", methods=["GET"])
@@ -24,6 +24,11 @@ def home():
   return render_template("home.html", listaGioc = listaGioc.to_html())
 
 
+@app.route("/filtri", methods=["GET"])
+def filtri():
+  #squadra = request.args['squadra']
+  #squadra_utente = lstGioc[lstGioc.Squadra.str.contains(squadra)]
+  return render_template("home.html", squadre = lstGioc['Squadra'])
 
 
 if __name__ == '__main__':
