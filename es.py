@@ -20,7 +20,8 @@ print(lstDif)
 
 @app.route("/", methods=["GET"])
 def home():
-  listaGioc = lstGioc
+  
+  listaGioc = lstGioc.drop('Id', axis = 1)
   return render_template("home.html", listaGioc = listaGioc.to_html())
 
 
@@ -32,4 +33,4 @@ def filtri():
 
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=3246, debug=True)
+  app.run(host='0.0.0.0', port=3247, debug=True)
