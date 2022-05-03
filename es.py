@@ -24,12 +24,14 @@ def home():
   elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
   listaGioc = lstGioc.drop('Id', axis = 1)
 
-  return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
+  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
 
 @app.route("/selsquadra", methods=["GET"])
 def selsquadra():
   #radio button
   sceltaruolo= request.args["scelta"]
+
+  
   if sceltaruolo == "AllRoles":
     listaGioc= lstGioc.drop('Id', axis = 1)
   elif sceltaruolo == "P":
@@ -40,13 +42,11 @@ def selsquadra():
     listaGioc= lstCen.drop('Id', axis = 1)
   elif sceltaruolo == "A":
     listaGioc= lstAtt.drop('Id', axis = 1)
-  return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
- 
 
   #menù a tendina
-  SquadraUtente = request.args['squadra']
-  listaGioc = lstGioc[lstGioc.Squadra==SquadraUtente.str.contains(SquadraUtente)]
-  return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
+  #SquadraUtente = request.args['squadra']
+  #listaGioc = lstGioc[lstGioc.Squadra==SquadraUtente.str.contains(SquadraUtente)]
+  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
 
 
 if __name__ == '__main__':

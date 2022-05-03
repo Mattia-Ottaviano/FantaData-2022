@@ -1,21 +1,36 @@
 .titolo {
-  color: rgb(0, 0, 0);
   text-align:center;
 }
 
 .infosito { 
-  color: rgb(0, 0, 0);
   text-align:center;
   font-size: large;
-  font-family:Georgia, 'Times New Roman', Times, serif
 }
 
 body {
-  background-color: rgb(199, 238, 237);
+  background-image: url("sfondofantadata1.jpg");
+  background-size:     cover;                      
+  background-repeat:   no-repeat;
+  background-position: center center;
+  font-family: sans-serif;
+  color: white;
 }
 
-.table {
+table {
   background-color: rgb(244, 239, 245);
+  color: black;
+  border-collapse: collapse;
+}
+
+.table :is(th, td) {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  margin: 0;
+  text-align: left;
+}
+
+.table td {
+  padding: 2px;
 }
 
 .selsquadra {

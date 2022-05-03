@@ -20,8 +20,7 @@
     <div class="content">
         <div class="table"
             style="width:700px; height: 800px; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
-            <table cellpadding="4" cellspacing="1" width="120%" border=0>
-                {{listaGioc|safe}}
+            {{listaGioc|safe}}
         </div>
 
 
@@ -33,7 +32,7 @@
             {{InfoSquadra|safe}}
 
             <input type="text" value="Nome giocatore:" name='calciatore'></input>
-            
+
             <h1>Seleziona Ruolo:</h1>
             <input type="radio" name="scelta" value="AllRoles">Tutti</input>
             <input type="radio" name="scelta" value="P">P</input>
@@ -43,7 +42,7 @@
 
 
 
-            
+
             <h2>Seleziona Squadra: </h2>
             <select name="squadra">
                 {% for squadra in squadre%}
@@ -51,7 +50,7 @@
                 {%endfor%}
 
             </select>
-            
+
 
 
 
@@ -63,12 +62,30 @@
 
 
             </select></br>
-        <input type="submit" value="Clicca qui"></input>
+            <input type="submit" value="Clicca qui"></input>
         </form>
     </div>
 
 
 </body>
+<script>
+    const td = document.querySelectorAll("td");
+    let c = "";
+
+    const colors = {
+        "P": "#f9ca24",
+        "D": "#6ab04c",
+        "C": "#22a6b3",
+        "A": "#eb4d4b"
+    }
+
+    td.forEach(e => {
+        if (Object.keys(colors).includes(e.innerText)) {
+            c = colors[e.innerText];
+        }
+        e.style.backgroundColor = c
+    });
+</script>
 
 
 
