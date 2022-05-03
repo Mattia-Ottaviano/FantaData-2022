@@ -27,7 +27,7 @@ def home():
   return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
 
 @app.route("/selsquadra", methods=["GET"])
-def selsquadra():sssssssssss
+def selsquadra():
   #radio button
   sceltaruolo= request.args["scelta"]
   if sceltaruolo == "AllRoles":
