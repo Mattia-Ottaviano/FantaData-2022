@@ -16,20 +16,37 @@ lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-
 lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Difensori')
 lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Centrocampisti')
 lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Attaccanti')
-print(lstDif)
+
 
 @app.route("/", methods=["GET"])
 def home():
-  
+  global elSquadre
+  elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
   listaGioc = lstGioc.drop('Id', axis = 1)
-  return render_template("home.html", listaGioc = listaGioc.to_html())
 
+  return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
 
-@app.route("/filtri", methods=["GET"])
-def filtri():
-  #squadra = request.args['squadra']
-  #squadra_utente = lstGioc[lstGioc.Squadra.str.contains(squadra)]
-  return render_template("home.html", squadre = lstGioc['Squadra'])
+@app.route("/selsquadra", methods=["GET"])
+def selsquadra():sssssssssss
+  #radio button
+  sceltaruolo= request.args["scelta"]
+  if sceltaruolo == "AllRoles":
+    listaGioc= lstGioc.drop('Id', axis = 1)
+  elif sceltaruolo == "P":
+    listaGioc= lstPort.drop('Id', axis = 1)
+  elif sceltaruolo == "D":
+    listaGioc= lstDif.drop('Id', axis = 1)
+  elif sceltaruolo == "C":
+    listaGioc= lstCen.drop('Id', axis = 1)
+  elif sceltaruolo == "A":
+    listaGioc= lstAtt.drop('Id', axis = 1)
+  return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
+ 
+
+  #menù a tendina
+  SquadraUtente = request.args['squadra']
+  listaGioc = lstGioc[lstGioc.Squadra==SquadraUtente.str.contains(SquadraUtente)]
+  return render_template("home.html", listaGioc = listaGioc.to_html(), squadre= elSquadre)
 
 
 if __name__ == '__main__':

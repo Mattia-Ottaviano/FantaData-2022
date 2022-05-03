@@ -1,4 +1,35 @@
-h1 {
-  color: navy;
-  margin-left: 200px;
+.titolo {
+  color: rgb(0, 0, 0);
+  text-align:center;
+}
+
+.infosito { 
+  color: rgb(0, 0, 0);
+  text-align:center;
+  font-size: large;
+  font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+body {
+  background-color: rgb(199, 238, 237);
+}
+
+.table {
+  background-color: rgb(244, 239, 245);
+}
+
+.selsquadra {
+  
+  width: 1000px;
+  height: 200px;
+  
+}
+
+
+.content .table {
+  float: left;
+}
+
+.content form {
+  margin-left: 1000px;
 }

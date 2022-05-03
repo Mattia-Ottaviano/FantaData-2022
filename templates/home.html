@@ -1,78 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>FantaData</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/styles/style.css">
-    
+
 </head>
+
 <body>
-    
-    <h1>FantaData 2022</h1>
-    
-    
-        
-    <p>
-        <div style="width:700px; height: 800px; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
+
+    <h1 class="titolo">FantaData 2022</h1>
+
+    <p class="infosito">Benvenuti nel mondo dei fanta Allenatori!
+    </p>
+
+    <div class="content">
+        <div class="table"
+            style="width:700px; height: 800px; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
             <table cellpadding="4" cellspacing="1" width="120%" border=0>
                 {{listaGioc|safe}}
-        </div> 
-    </p>
+        </div>
+
+
+
+
+
+
+        <form action="/selsquadra" method="GET">
+            {{InfoSquadra|safe}}
+
+            <input type="text" value="Nome giocatore:" name='calciatore'></input>
+            
+            <h1>Seleziona Ruolo:</h1>
+            <input type="radio" name="scelta" value="AllRoles">Tutti</input>
+            <input type="radio" name="scelta" value="P">P</input>
+            <input type="radio" name="scelta" value="D">D</input>
+            <input type="radio" name="scelta" value="C">C</input>
+            <input type="radio" name="scelta" value="A">A</input>
+
+
+
+            
+            <h2>Seleziona Squadra: </h2>
+            <select name="squadra">
+                {% for squadra in squadre%}
+                <option value="{{squadra}}">{{squadra}}</option>
+                {%endfor%}
+
+            </select>
+            
+
+
+
+            <h3>Seleziona Criterio d'ordine:</h3>
+            <select name="ordina">
+                {% for criterio in criteri%}
+                <option value="{{criterio}}">{{criterio}}</option>
+                {%endfor%}
+
+
+            </select></br>
+        <input type="submit" value="Clicca qui"></input>
+        </form>
+    </div>
+
+
 </body>
 
-<form action="/filtri" method = "GET">
-    <h1>Seleziona Squadra:</h1>
-    
-    <select name="squadra">
-        {% for squadra in squadre%}
-        <option value="{{squadra}}" >{{squadra}}</option>
-        {%endfor%}
-    </select>
-    <h1>Seleziona Criterio d'ordine:</h1>
-    <select name="ordina">
-        {% for criterio in criteri%}
-        <option value="{{criterio}}" >{{criterio}}</option>
-        {%endfor%}
-    </select>
-    <h1>Seleziona Ruolo:</h1>
-    <input type="radio" name="scelta" value="AllRoles">Tutti</input><br>
-    <input type="radio" name="scelta" value="P">P</input><br>
-    <input type="radio" name="scelta" value="D">D</input><br>
-    <input type="radio" name="scelta" value="C">C</input><br>
-    <input type="radio" name="scelta" value="A">A</input><br>
-
-    <input type="text" value="Nome giocatore:" name='calciatore'></input>
-
-    <p><input type = "submit" value = "Submit" /></p>
-
-</form>
-
-<form action="/ordinaper" method = "GET">
-    <h1>Seleziona Criterio d'ordine:</h1>
-    <select name="ordina">
-        {% for criterio in criteri%}
-        <option value="{{criterio}}" >{{criterio}}</option>
-        {%endfor%}
-    </select>
-    <p><input type = "submit" value = "Submit" /></p>
-</form>
-
-<form action="/radiobuttons">
-    <h1>Seleziona Ruolo:</h1>
-    <input type="radio" name="scelta" value="AllRoles">Tutti</input><br>
-    <input type="radio" name="scelta" value="P">P</input><br>
-    <input type="radio" name="scelta" value="D">D</input><br>
-    <input type="radio" name="scelta" value="C">C</input><br>
-    <input type="radio" name="scelta" value="A">A</input><br>
 
 
-    <input type="submit" value="Clicca qui"></input>
-</form>
-
-<form action="/input">
-    <input type="text" value="Nome giocatore:" name='calciatore'></input>
-    <input type="submit" value="Clicca qui"></input>
-</form>
 </html>
