@@ -19,7 +19,7 @@
 
     <div class="content">
         <div class="table"
-            style="width:700px; height: 800px; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
+            style="width: 678px; height: 800px; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
             {{listaGioc|safe}}
         </div>
 
@@ -59,10 +59,16 @@
                 {% for criterio in criteri%}
                 <option value="{{criterio}}">{{criterio}}</option>
                 {%endfor%}
-
-
             </select></br>
-            <input type="submit" value="Clicca qui"></input>
+
+
+
+
+
+
+
+            <input type="submit" style="visibility: hidden;" />
+
         </form>
     </div>
 

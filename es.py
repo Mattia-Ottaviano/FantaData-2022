@@ -1,15 +1,8 @@
 from flask import Flask,render_template, request, Response, redirect, url_for
 app = Flask(__name__)
 
-#import io
 import pandas as pd
-#import geopandas as gpd
-#import contextily
-#from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-#from matplotlib.figure import Figure
-#import matplotlib
-#matplotlib.use('Agg')
-#import matplotlib.pyplot as plt
+
 
 lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Tutti')
 lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Portieri')
@@ -22,7 +15,7 @@ lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-2
 def home():
   global elSquadre
   elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
-  listaGioc = lstGioc.drop('Id', axis = 1)
+  listaGioc = lstGioc
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
 
@@ -30,22 +23,18 @@ def home():
 def selsquadra():
   #radio button
   sceltaruolo= request.args["scelta"]
-
-  
   if sceltaruolo == "AllRoles":
-    listaGioc= lstGioc.drop('Id', axis = 1)
+    listaGioc= lstGioc
   elif sceltaruolo == "P":
-    listaGioc= lstPort.drop('Id', axis = 1)
+    listaGioc= lstPort
   elif sceltaruolo == "D":
-    listaGioc= lstDif.drop('Id', axis = 1)
+    listaGioc= lstDif
   elif sceltaruolo == "C":
-    listaGioc= lstCen.drop('Id', axis = 1)
+    listaGioc= lstCen
   elif sceltaruolo == "A":
-    listaGioc= lstAtt.drop('Id', axis = 1)
+    listaGioc= lstAtt
 
-  #menù a tendina
-  #SquadraUtente = request.args['squadra']
-  #listaGioc = lstGioc[lstGioc.Squadra==SquadraUtente.str.contains(SquadraUtente)]
+
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
 
 
