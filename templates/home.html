@@ -28,7 +28,7 @@
 
 
 
-        <form action="/selsquadra" method="GET">
+        <form action="/selruolo" method="GET">
             {{InfoSquadra|safe}}
 
             <input type="text" value="Nome giocatore:" name='calciatore'></input>
@@ -39,19 +39,21 @@
             <input type="radio" name="scelta" value="D">D</input>
             <input type="radio" name="scelta" value="C">C</input>
             <input type="radio" name="scelta" value="A">A</input>
+            <input type="submit" name="Invio" value="B">B</input>
 
+        </form>
 
-
+        <form action="/menùsquadre" method="GET"></form>
 
             <h2>Seleziona Squadra: </h2>
+
             <select name="squadra">
                 {% for squadra in squadre%}
                 <option value="{{squadra}}">{{squadra}}</option>
                 {%endfor%}
-
             </select>
 
-
+        </form>
 
 
             <h3>Seleziona Criterio d'ordine:</h3>
@@ -69,7 +71,7 @@
 
             <input type="submit" style="visibility: hidden;" />
 
-        </form>
+        
     </div>
 
 
