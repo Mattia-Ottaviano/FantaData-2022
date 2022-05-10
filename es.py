@@ -23,21 +23,25 @@ def home():
 def selsquadra():
   #radio button
   sceltaruolo= request.args["scelta"]
-  if sceltaruolo == "AllRoles":
-    listaGioc = lstGioc
-    return render_template("allroles.html", listaGioc = listaGioc.to_html(border=0))
-  elif sceltaruolo == "P":
-    listaGioc = lstPort
-    return render_template("portieri.html", listaGioc = listaGioc.to_html(border=0))
-  elif sceltaruolo == "D":
-    listaGioc = lstDif
-    return render_template("difensori.html", listaGioc = listaGioc.to_html(border=0))
-  elif sceltaruolo == "C":
-    listaGioc = lstcen
-    return render_template("centrocampisti.html", listaGioc = listaGioc.to_html(border=0))
-  elif sceltaruolo == "A":
-    listaGioc = lstAtt
-    return render_template("attaccanti.html", listaGioc = listaGioc.to_html(border=0))
+
+  if sceltaruolo == ""
+    if sceltaruolo == "AllRoles":
+      listaGioc = lstGioc
+      return render_template("home.html", listaGioc = listaGioc.to_html(border=0))
+    elif sceltaruolo == "P":
+      listaGioc = lstPort
+      return render_template("portieri.html", listaGioc = listaGioc.to_html(border=0))
+    elif sceltaruolo == "D":
+      listaGioc = lstDif
+      return render_template("difensori.html", listaGioc = listaGioc.to_html(border=0))
+    elif sceltaruolo == "C":
+      listaGioc = lstcen
+      return render_template("centrocampisti.html", listaGioc = listaGioc.to_html(border=0))
+    elif sceltaruolo == "A":
+      listaGioc = lstAtt
+      return render_template("attaccanti.html", listaGioc = listaGioc.to_html(border=0))
+  else:
+
    
   
   
