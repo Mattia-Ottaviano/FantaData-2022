@@ -1,8 +1,8 @@
-from flask import Flask,render_template, request, Response, redirect, url_for
+from flask import Flask,render_template, request, Response, redirect, url_for, session
 app = Flask(__name__)
 
 import pandas as pd
-
+from IPython.display import HTML
 
 lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Tutti')
 lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Portieri')
@@ -13,74 +13,68 @@ lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-2
 
 @app.route("/", methods=["GET"])
 def home():
-  global elSquadre
+  global elSquadre, criteri
   elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
   listaGioc = lstGioc
+  criteri = list(lstGioc.columns.values)
 
-  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
+  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre, criteri=criteri)
 
 @app.route("/selruolo", methods=["GET"])
 def selsquadra():
   #radio button
-  sceltaruolo= request.args["scelta"]
-
-  if sceltaruolo == ""
-    if sceltaruolo == "AllRoles":
-      listaGioc = lstGioc
-      return render_template("home.html", listaGioc = listaGioc.to_html(border=0))
-    elif sceltaruolo == "P":
-      listaGioc = lstPort
-      return render_template("portieri.html", listaGioc = listaGioc.to_html(border=0))
-    elif sceltaruolo == "D":
-      listaGioc = lstDif
-      return render_template("difensori.html", listaGioc = listaGioc.to_html(border=0))
-    elif sceltaruolo == "C":
-      listaGioc = lstcen
-      return render_template("centrocampisti.html", listaGioc = listaGioc.to_html(border=0))
-    elif sceltaruolo == "A":
-      listaGioc = lstAtt
-      return render_template("attaccanti.html", listaGioc = listaGioc.to_html(border=0))
-  else:
 
    
-  
-  
-  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
+  sceltaruolo = request.args["scelta"]
+  sceltasquadra= request.args["squadra"]
+  sceltacriterio= request.args["criterio"]
+  sceltagiocatore= request.args["calciatore"]
 
-
-@app.route("/allroles", methods=["GET"])
-def allroles():
-    elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
-    listaGioc = lstGioc
-    return render_template("allroles.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
-
-
-@app.route("/por", methods=["GET"])
-def por():
-    elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
-    listaGioc = lstPort
-    return render_template("por.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
-
-
-@app.route("/dif", methods=["GET"])
-def dif():
-    elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
-    listaGioc = lstDif
-    return render_template("por.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
-
-
-@app.route("/cen", methods=["GET"])
-def cen():
-    elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
-    listaGioc = lstCen
-    return render_template("por.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
-
-
-@app.route("/att", methods=["GET"])
-def att():
-    elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
+  if sceltaruolo == "AllRoles":
+    listaGioc = lstGioc 
+  elif sceltaruolo == "P":
+    listaGioc = lstPort 
+  elif sceltaruolo == "D":
+    listaGioc = lstDif 
+  elif sceltaruolo == "C":
+    listaGioc = lstCen  
+  elif sceltaruolo == "A":
     listaGioc = lstAtt
-    return render_template("por.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre)
+    
+
+  if sceltasquadra== "-":
+      listaGioc = listaGioc[listaGioc['Squadra']==listaGioc['Squadra']]
+  elif sceltasquadra in listaGioc['Squadra'].values:
+      listaGioc = listaGioc[listaGioc['Squadra']==sceltasquadra]
+
+
+
+
+  if sceltacriterio== "-":
+      listaGioc = listaGioc
+  elif sceltacriterio in criteri:
+    if sceltacriterio == 'Nome'or sceltacriterio == 'Squadra':
+      listaGioc = listaGioc.sort_values(by=sceltacriterio, ascending= True)
+    else:
+      listaGioc = listaGioc.sort_values(by=sceltacriterio, ascending= False)
+
+
+
+
+
+
+
+
+
+
+  listaGioc['Nome'] = listaGioc['Nome'].apply(lambda x: f'<a href=/workspace/FantaData-2022/templates/player.html/{x}">{x}</a>')
+  HTML(listaGioc.to_html(escape=False))
+
+
+  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre, criteri=criteri)
+
+
+
 
 
 

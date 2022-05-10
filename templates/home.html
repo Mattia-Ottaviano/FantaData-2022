@@ -19,59 +19,57 @@
 
     <div class="content">
         <div class="table"
-            style="width: 678px; height: 800px; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
+            style="width: 678px; height: 800px;  overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
             {{listaGioc|safe}}
+            
         </div>
 
 
-
+ 
 
 
 
         <form action="/selruolo" method="GET">
-            {{InfoSquadra|safe}}
-
-            <input type="text" value="Nome giocatore:" name='calciatore'></input>
+    
+            <h4>Cerca per nome:</h4>
+            <input type="text" value="" name='calciatore'></input>
 
             <h1>Seleziona Ruolo:</h1>
-            <input type="radio" name="scelta" value="AllRoles">Tutti</input>
-            <input type="radio" name="scelta" value="P">P</input>
-            <input type="radio" name="scelta" value="D">D</input>
-            <input type="radio" name="scelta" value="C">C</input>
-            <input type="radio" name="scelta" value="A">A</input>
-            <input type="submit" name="Invio" value="B">B</input>
+            <input type="radio" name="scelta" value="AllRoles" required>Tutti
+            <input type="radio" name="scelta" value="P" required>P
+            <input type="radio" name="scelta" value="D" required>D
+            <input type="radio" name="scelta" value="C" required>C
+            <input type="radio" name="scelta" value="A" required>A
 
-        </form>
-
-        <form action="/menùsquadre" method="GET"></form>
 
             <h2>Seleziona Squadra: </h2>
-
-            <select name="squadra">
+            <select name="squadra" required>
+                <option value="-">-</option>
                 {% for squadra in squadre%}
                 <option value="{{squadra}}">{{squadra}}</option>
                 {%endfor%}
             </select>
 
-        </form>
 
 
             <h3>Seleziona Criterio d'ordine:</h3>
-            <select name="ordina">
+            <select name="criterio" required>
+                <option value="-">-</option>
                 {% for criterio in criteri%}
                 <option value="{{criterio}}">{{criterio}}</option>
                 {%endfor%}
-            </select></br>
-
-
-
-
-
-
-
-            <input type="submit" style="visibility: hidden;" />
-
+            </select>
         
+            </br>
+
+            <input type="submit" name="Invio" value="Cerca" id="send">
+        </form>
+
+
+
+
+
+
     </div>
 
 
@@ -93,6 +91,21 @@
         }
         e.style.backgroundColor = c
     });
+
+    // const send = document.getElementById("send");
+    // const radiobuttons = document.querySelectorAll('input[type="radio"]');
+    // const checked = document.querySelectorAll('input[type="radio"]:checked');
+
+    // send.disabled = checked.length > 0 ? false : true;
+
+    // radiobuttons.forEach(r => {
+    //     r.onclick = () => {
+    //         const checked = document.querySelectorAll('input[type="radio"]:checked');
+    //         send.disabled = checked.length > 0 ? false : true;
+    //     };
+    // });
+
+
 </script>
 
 
