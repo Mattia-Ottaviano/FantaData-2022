@@ -65,6 +65,12 @@ def selsquadra():
     listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
 
 
+  def convert(column):
+    return '<a href="{}">{}</a>'.format(column['Nome'],  column.Nome)
+
+    listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
+    print(listaGioc)
+
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre, criteri=criteri)
 
