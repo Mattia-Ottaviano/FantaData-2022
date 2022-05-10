@@ -59,16 +59,11 @@ def selsquadra():
       listaGioc = listaGioc.sort_values(by=sceltacriterio, ascending= False)
 
 
+  if sceltagiocatore == "":
+    listaGioc = listaGioc
+  else:
+    listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
 
-
-
-
-
-
-
-
-  listaGioc['Nome'] = listaGioc['Nome'].apply(lambda x: f'<a href=/workspace/FantaData-2022/templates/player.html/{x}">{x}</a>')
-  HTML(listaGioc.to_html(escape=False))
 
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre, criteri=criteri)
