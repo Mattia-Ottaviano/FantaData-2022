@@ -4,11 +4,11 @@ app = Flask(__name__)
 import pandas as pd
 from IPython.display import HTML
 
-lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Tutti')
-lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Portieri')
-lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Difensori')
-lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Centrocampisti')
-lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22 .xlsx', sheet_name = 'Attaccanti')
+lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Tutti')
+lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Portieri')
+lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Difensori')
+lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Centrocampisti')
+lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Attaccanti')
 
 
 @app.route("/", methods=["GET"])
@@ -18,12 +18,17 @@ def home():
   listaGioc = lstGioc
   criteri = list(lstGioc.columns.values)
 
-  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre, criteri=criteri)
+  def convert(column):
+    return '<a href="/selruolo/{}">{}</a>'.format(column['Nome'],  column.Nome)
+
+  listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
+
+  return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
 @app.route("/selruolo", methods=["GET"])
 def selsquadra():
   #radio button
-
+  global listaGioc
    
   sceltaruolo = request.args["scelta"]
   sceltasquadra= request.args["squadra"]
@@ -66,15 +71,19 @@ def selsquadra():
 
 
   def convert(column):
-    return '<a href="{}">{}</a>'.format(column['Nome'],  column.Nome)
+    return '<a href="/selruolo/{}">{}</a>'.format(column['Nome'],  column.Nome)
 
   listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
 
-
-  return render_template("home.html", listaGioc = listaGioc.to_html(border=0), squadre= elSquadre, criteri=criteri)
-
+  return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
 
+@app.route("/selruolo/<valore>", methods=["GET"])
+def linkgioc(valore):
+
+  giocatore = lstGioc[lstGioc["Id"] == valore]
+    
+  return render_template("player.html", giocatore = giocatore)
 
 
 

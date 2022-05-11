@@ -21,16 +21,16 @@
         <div class="table"
             style="width: 678px; height: 800px;  overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
             {{listaGioc|safe}}
-            
+
         </div>
 
 
- 
+
 
 
 
         <form action="/selruolo" method="GET">
-    
+
             <h4>Cerca per nome:</h4>
             <input type="text" value="" name='calciatore'></input>
 
@@ -59,7 +59,7 @@
                 <option value="{{criterio}}">{{criterio}}</option>
                 {%endfor%}
             </select>
-        
+
             </br>
 
             <input type="submit" name="Invio" value="Cerca" id="send">
@@ -85,13 +85,15 @@
         "A": "#eb4d4b"
     }
 
-    td.forEach(e => {
+    for (let i = 0; i < td.length; i++) {
+        const e = td[i];
         if (Object.keys(colors).includes(e.innerText)) {
             c = colors[e.innerText];
+            td[i-1].style.backgroundColor = c;
         }
         e.style.backgroundColor = c
-        e.innerHTML = e.innerText
-    });
+
+    }
 
     // const send = document.getElementById("send");
     // const radiobuttons = document.querySelectorAll('input[type="radio"]');
