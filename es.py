@@ -23,6 +23,9 @@ def home():
 
   listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
 
+    
+
+      
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
 @app.route("/selruolo", methods=["GET"])
@@ -66,8 +69,15 @@ def selsquadra():
 
   if sceltagiocatore == "":
     listaGioc = listaGioc
+  elif sceltagiocatore.upper() not in listaGioc['Nome'].to_list():
+
+
+    return render_template("errore.html", gioc=sceltagiocatore)
   else:
     listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
+
+  
+  
 
 
   def convert(column):
