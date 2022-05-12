@@ -77,6 +77,10 @@ def selsquadra():
     listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
 
   
+  if sceltagiocatore not in listaGioc['Nome'].to_list():
+    return render_template("errore.html", gioc = sceltagiocatore)
+
+  
   
 
 
