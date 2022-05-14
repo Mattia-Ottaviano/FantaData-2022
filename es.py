@@ -11,26 +11,27 @@ lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-2
 lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Attaccanti')
 
 
+
+
 @app.route("/", methods=["GET"])
 def home():
   global elSquadre, criteri
   elSquadre = lstGioc['Squadra'].drop_duplicates().sort_values(ascending=True)
   listaGioc = lstGioc
   criteri = list(lstGioc.columns.values)
-
+  
   def convert(column):
     return '<a href="/selruolo/{}">{}</a>'.format(column['Nome'],  column.Nome)
 
   listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
-
-    
-
+  
       
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
+
 @app.route("/selruolo", methods=["GET"])
-def selsquadra():
-  #radio button
+def selruolo():
+
   global listaGioc
    
   sceltaruolo = request.args["scelta"]
@@ -69,35 +70,36 @@ def selsquadra():
 
   if sceltagiocatore == "":
     listaGioc = listaGioc
-  elif sceltagiocatore.upper() not in listaGioc['Nome'].to_list():
+  #elif sceltagiocatore not in listaGioc['Nome'].to_list():
 
-
-    return render_template("errore.html", gioc=sceltagiocatore)
+    #return render_template("errore.html", gioc=sceltagiocatore)
+  
   else:
     listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
 
   
-  if sceltagiocatore not in listaGioc['Nome'].to_list():
-    return render_template("errore.html", gioc = sceltagiocatore)
-
-  
-  
+  #if sceltagiocatore not in listaGioc['Nome'].to_list():
+    #return render_template("errore.html", gioc = sceltagiocatore)
 
 
   def convert(column):
     return '<a href="/selruolo/{}">{}</a>'.format(column['Nome'],  column.Nome)
 
   listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
+  
+
+
+  
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
 
-@app.route("/selruolo/<valore>", methods=["GET"])
-def linkgioc(valore):
+#@app.route("/selruolo/<valore>", methods=["GET"])
+#def linkgioc(valore):
 
-  giocatore = lstGioc[lstGioc["Id"] == valore]
+  #giocatore = lstGioc[lstGioc["Id"] == valore]
     
-  return render_template("player.html", giocatore = giocatore)
+  #return render_template("player.html", giocatore = giocatore)
 
 
 
