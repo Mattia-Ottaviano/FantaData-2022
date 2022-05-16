@@ -1,16 +1,59 @@
-<h1 id="nome_gioc">{{nome}}</h1> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoGiocatore</title>
+    <link rel="stylesheet" href="/static/styles/player.css">
+</head>
 
-<h1>Squadra:</h1>
-{{squadra}}
-<h1>Gol:</h1>
-{{gol}}
-<h1>Assist::</h1>
-{{assist}}
-<h1>Amm:</h1>
-{{amm}}
-<h1>Esp:</h1>
-{{esp}}
-<h1>Media:</h1>
-{{media}}
-<h1>FantaMedia:</h1>
-{{fantamedia}}
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+</style>
+<body>
+    <h1 class="titolo">FantaData 2022</h1>
+    <h1 class="nome_gioc">{{nome}}</h1>                                              
+    
+
+    
+    <h1 class="squadra">{{squadra}}</h1>
+    <h1 class="ruolo">{{ruolo}}</h1>
+
+
+    
+    
+
+    <div class="table"></div>
+    <table style="margin-top:200px; margin-left:480px;">
+
+
+        <tr>
+          <th>Presenze</th>
+          <th>Gol</th>
+          <th>Assist</th>
+          <th>Amm</th>
+          <th>Esp</th>
+          <th>Media</th>
+          <th>FantaMedia</th>
+        </tr>
+         <tr>
+          <td>{{pres}}</td>
+          <td>{{gol}}</td>  
+          <td>{{assist}}</td>  
+          <td>{{amm}}</td>  
+          <td>{{esp}}</td>  
+          <td>{{media}}</td>  
+          <td>{{fantamedia}}</td>    
+
+        </tr>    
+      
+    </table>
+    </div>
+
+</body>
+</html>
+
+
