@@ -20,10 +20,7 @@ def home():
   listaGioc = lstGioc
   criteri = list(lstGioc.columns.values)
   
-  def convert(column):
-    return '<a href="/selruolo/{}">{}</a>'.format(column['Nome'],  column.Nome)
 
-  listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
   
       
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
@@ -83,23 +80,21 @@ def selruolo():
 
 
   def convert(column):
-    return '<a href="/selruolo/{}">{}</a>'.format(column['Nome'],  column.Nome)
+    return '<a href="/workspace/FantaData-2022/{}">{}</a>'.format(column['Nome'],  column.Nome)
 
   listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
-  
 
-
-  
+  #listaGioc['Nome'] = listaGioc['Nome'].apply(lambda x: f'<a href="/workspace/FantaData-2022/templates/player.html/{x}">{x}</a>')
+  #HTML(listaGioc.to_html(escape=False))
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
 
-#@app.route("/selruolo/<valore>", methods=["GET"])
-#def linkgioc(valore):
-
-  #giocatore = lstGioc[lstGioc["Id"] == valore]
-    
-  #return render_template("player.html", giocatore = giocatore)
+@app.route("/workspace/FantaData-2022/<giocatore>", methods=["GET"])
+def infogioc(giocatore):
+  riga = listaGioc[listaGioc["Nome"] == f'<a href="/workspace/FantaData-2022/{giocatore}">{giocatore}</a>']
+  print(listaGioc)
+  return render_template("player.html", nome=giocatore, squadra=riga.to_html())
 
 
 
