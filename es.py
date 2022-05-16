@@ -92,9 +92,16 @@ def selruolo():
 
 @app.route("/workspace/FantaData-2022/<giocatore>", methods=["GET"])
 def infogioc(giocatore):
-  riga = listaGioc[listaGioc["Nome"] == f'<a href="/workspace/FantaData-2022/{giocatore}">{giocatore}</a>']
-  print(listaGioc)
-  return render_template("player.html", nome=giocatore, squadra=riga.to_html())
+  info_gioc = listaGioc[listaGioc["Nome"] == f'<a href="/workspace/FantaData-2022/{giocatore}">{giocatore}</a>']
+  squadra = info_gioc['Squadra'].values[0]
+  gol = info_gioc['Gf'].values[0]
+  assist = info_gioc['Ass'].values[0]
+  amm = info_gioc['Amm'].values[0]
+  esp = info_gioc['Esp'].values[0]
+  media= info_gioc['Mv'].values[0]
+  fantamedia= info_gioc['Mf'].values[0]
+  print(squadra)
+  return render_template("player.html", nome=giocatore, info_gioc=info_gioc.to_html(), squadra = squadra, gol =gol, assist= assist, amm = amm, esp= esp, media= media, fantamedia= fantamedia )
 
 
 
