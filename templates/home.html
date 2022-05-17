@@ -20,15 +20,15 @@
     <div class="content">
         
         <div class="table"
-            style="width: 678px; height: 800px;  overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
+            style="max-height: 80vh; overflow-x:  hidden;  overflow-y:  scroll; border:1px solid black;">
             {{listaGioc|safe}}
     
         </div>
 
+    </div>
 
 
-
-
+    <div class="filtri">
         <form action="/selruolo" method="GET">
 
          
@@ -66,13 +66,7 @@
 
             <input type="submit" name="Invio" value="Cerca" id="send">
         </form>
-
-
-
-
-
-
-    </div>
+        </div>
 
 
 </body>

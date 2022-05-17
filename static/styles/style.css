@@ -1,10 +1,12 @@
 .titolo {
   text-align:center;
+  margin-top:0
 }
 
 .infosito { 
   text-align:center;
   font-size: large;
+  margin-top: 0;
 }
 
 body {
@@ -14,12 +16,15 @@ body {
   background-position: center center;
   font-family: sans-serif;
   color: white;
+  height: 100vh;
 }
 
 table {
   background-color: rgb(244, 239, 245);
   color: black;
   border-collapse: collapse;
+  margin-top: 0;
+
 }
 
 .table :is(th, td) {
@@ -37,6 +42,7 @@ table {
   
   width: 1000px;
   height: 200px;
+
   
 }
 
@@ -46,6 +52,14 @@ table {
 }
 
 .content form {
-  margin-left: 1000px;
+  margin-left: 69%;
+  
+}
+
+
+.filtri {
+  margin-top:2.5%;
+  margin-left: 65%;
+  position:fixed
 }
 

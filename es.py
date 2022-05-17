@@ -1,8 +1,16 @@
-from flask import Flask,render_template, request, Response, redirect, url_for, session
+from flask import Flask, render_template, send_file, make_response, url_for, Response, request
+from flask import Flask, render_template, request, Response, redirect, url_for 
 app = Flask(__name__)
 
+
+import io
 import pandas as pd
 from IPython.display import HTML
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
 lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Tutti')
 lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Portieri')
@@ -92,6 +100,7 @@ def selruolo():
 
 @app.route("/workspace/FantaData-2022/<giocatore>", methods=["GET"])
 def infogioc(giocatore):
+  global info_gioc, val
   info_gioc = listaGioc[listaGioc["Nome"] == f'<a href="/workspace/FantaData-2022/{giocatore}">{giocatore}</a>']
   squadra = info_gioc['Squadra'].values[0].upper()
   ruolo = info_gioc['R'].values[0]
@@ -102,11 +111,27 @@ def infogioc(giocatore):
   esp = info_gioc['Esp'].values[0]
   media= info_gioc['Mv'].values[0]
   fantamedia= info_gioc['Mf'].values[0]
-  print(squadra)
+  val= 38
+  print(info_gioc)
+
   return render_template("player.html", nome=giocatore, info_gioc=info_gioc.to_html(), squadra = squadra, ruolo= ruolo, pres=pres, gol =gol, assist= assist, amm = amm, esp= esp, media= media, fantamedia= fantamedia )
 
+@app.route("/grafico.png", methods=["GET"])
+def graficopng():
 
+    df= info_gioc[['Pg','Gf','Ass','Amm','Esp','Mv','Mf']]
+    
+    print(df)
 
+    fig, ax = plt.subplots(figsize = (12,4))
+
+    ax.bar(df.columns, df.values[0])
+    ax.set_ylim(0,38)
+    plt.savefig('fig.png')
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+    
 
 
 if __name__ == '__main__':
