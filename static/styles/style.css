@@ -6,7 +6,7 @@
 .infosito { 
   text-align:center;
   font-size: large;
-  margin-top: 0;
+  margin-top: 0
 }
 
 body {
@@ -32,28 +32,12 @@ table {
   border-bottom: 1px solid black;
   margin: 0;
   text-align: left;
-}
-
-.table td {
-  padding: 2px;
-}
-
-.selsquadra {
   
-  width: 1000px;
-  height: 200px;
 
-  
 }
-
 
 .content .table {
   float: left;
-}
-
-.content form {
-  margin-left: 69%;
-  
 }
 
 
@@ -62,4 +46,6 @@ table {
   margin-left: 65%;
   position:fixed
 }
+
+
 

@@ -17,8 +17,11 @@ lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-
 lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Difensori')
 lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Centrocampisti')
 lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Attaccanti')
-
-
+lstGioc = lstGioc.reset_index(drop=True)
+lstPort =lstPort.reset_index(drop=True)
+lstDif =lstDif.reset_index(drop=True)
+lstCen =lstCen.reset_index(drop=True)
+lstAtt =lstAtt.reset_index(drop=True)
 
 
 @app.route("/", methods=["GET"])
@@ -124,10 +127,10 @@ def graficopng():
     print(df)
 
     fig, ax = plt.subplots(figsize = (12,4))
-
+    
     ax.bar(df.columns, df.values[0])
     ax.set_ylim(0,38)
-    plt.savefig('fig.png')
+    plt.savefig('/workspace/FantaData-2022/static/styles/fig.png', facecolor='none')
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
