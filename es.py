@@ -11,17 +11,22 @@ from matplotlib.figure import Figure
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import geopandas as gpd
+import contextily
 
 lstGioc = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Tutti')
 lstPort = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Portieri')
 lstDif = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Difensori')
 lstCen = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Centrocampisti')
 lstAtt = pd.read_excel('/workspace/FantaData-2022/Statistiche_Fantacalcio_2021-22.xlsx', sheet_name = 'Attaccanti')
+comuni = gpd.read_file("/workspace/FantaData-2022/Comuni.zip")
 lstGioc = lstGioc.reset_index(drop=True)
 lstPort =lstPort.reset_index(drop=True)
 lstDif =lstDif.reset_index(drop=True)
 lstCen =lstCen.reset_index(drop=True)
 lstAtt =lstAtt.reset_index(drop=True)
+print(comuni)
+
 
 
 @app.route("/", methods=["GET"])
@@ -78,32 +83,22 @@ def selruolo():
 
   if sceltagiocatore == "":
     listaGioc = listaGioc
-  #elif sceltagiocatore not in listaGioc['Nome'].to_list():
-
-    #return render_template("errore.html", gioc=sceltagiocatore)
-  
+  elif lstGioc[~lstGioc['Nome'].str.startswith(sceltagiocatore)]:
+    return render_template('errore.html')
   else:
     listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
 
   
-  #if sceltagiocatore not in listaGioc['Nome'].to_list():
-    #return render_template("errore.html", gioc = sceltagiocatore)
-
-
   def convert(column):
     return '<a href="/workspace/FantaData-2022/{}">{}</a>'.format(column['Nome'],  column.Nome)
-
   listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
-
-  #listaGioc['Nome'] = listaGioc['Nome'].apply(lambda x: f'<a href="/workspace/FantaData-2022/templates/player.html/{x}">{x}</a>')
-  #HTML(listaGioc.to_html(escape=False))
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 
 
 @app.route("/workspace/FantaData-2022/<giocatore>", methods=["GET"])
 def infogioc(giocatore):
-  global info_gioc, val
+  global info_gioc, comune
   info_gioc = listaGioc[listaGioc["Nome"] == f'<a href="/workspace/FantaData-2022/{giocatore}">{giocatore}</a>']
   squadra = info_gioc['Squadra'].values[0].upper()
   ruolo = info_gioc['R'].values[0]
@@ -114,9 +109,52 @@ def infogioc(giocatore):
   esp = info_gioc['Esp'].values[0]
   media= info_gioc['Mv'].values[0]
   fantamedia= info_gioc['Mf'].values[0]
-  val= 38
-  print(info_gioc)
 
+  if squadra == 'ATALANTA':
+    comune='Bergamo'
+  elif squadra == 'BOLOGNA':
+    comune='Bologna'
+  elif squadra == 'CAGLIARI':
+    comune='Cagliari'
+  elif squadra == 'EMPOLI':
+    comune='Empoli'
+  elif squadra == 'FIORENTINA':
+    comune='Firenze'
+  elif squadra == 'GENOA':
+    comune='Genova'
+  elif squadra == 'INTER':
+    comune='Milano'
+  elif squadra == 'JUVENTUS':
+    comune='Torino'
+  elif squadra == 'LAZIO':
+    comune='Roma'
+  elif squadra == 'MILAN':
+    comune='Milano'
+  elif squadra == 'NAPOLI':
+    comune='Napoli'
+  elif squadra == 'SALERNITANA':
+    comune='Salerno'
+  elif squadra == 'SAMPDORIA':
+    comune='Genova'
+  elif squadra == 'SASSUOLO':
+    comune='Reggio nell\'Emilia'
+  elif squadra == 'SPEZIA':
+    comune='La Spezia'
+  elif squadra == 'TORINO':
+    comune='Torino'
+  elif squadra == 'UDINESE':
+    comune='Udine'
+  elif squadra == 'VENEZIA':
+    comune='Venezia'
+  elif squadra == 'VERONA':
+    comune='Verona'
+  else:
+    comune='Roma'
+
+  
+
+
+  
   return render_template("player.html", nome=giocatore, info_gioc=info_gioc.to_html(), squadra = squadra, ruolo= ruolo, pres=pres, gol =gol, assist= assist, amm = amm, esp= esp, media= media, fantamedia= fantamedia )
 
 @app.route("/grafico.png", methods=["GET"])
@@ -137,8 +175,20 @@ def graficopng():
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
-    
 
+    
+    
+@app.route("/mappa.png", methods=["GET"])
+def mappapng():
+    fig, ax = plt.subplots(figsize = (10,5))
+    com = comuni[comuni['COMUNE']==comune]
+    com.to_crs(epsg=3857).plot(ax=ax, edgecolor="k", facecolor="red", alpha=0.4)
+    contextily.add_basemap(ax=ax)   
+
+    output = io.BytesIO()
+    FigureCanvas(fig).print_png(output)
+    return Response(output.getvalue(), mimetype='image/png')
+    
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=3247, debug=True)

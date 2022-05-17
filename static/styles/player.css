@@ -35,7 +35,7 @@ body {
           
     table-layout: fixed;
     width: 100%;
-    float: left;
+    margin-top: 12;
    
     
 }
@@ -48,5 +48,5 @@ td {
 
 
 .grafico{
-    float: right;
+    margin-top: 12;
 }
