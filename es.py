@@ -127,10 +127,12 @@ def graficopng():
     print(df)
 
     fig, ax = plt.subplots(figsize = (12,4))
+
     
     ax.bar(df.columns, df.values[0])
+
     ax.set_ylim(0,38)
-    plt.savefig('/workspace/FantaData-2022/static/styles/fig.png', facecolor='none')
+    plt.savefig('/workspace/FantaData-2022/static/styles/fig.png')
     output = io.BytesIO()
     FigureCanvas(fig).print_png(output)
     return Response(output.getvalue(), mimetype='image/png')
