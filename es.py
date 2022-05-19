@@ -83,8 +83,8 @@ def selruolo():
 
   if sceltagiocatore == "":
     listaGioc = listaGioc
-  elif lstGioc[~lstGioc['Nome'].str.startswith(sceltagiocatore)]:
-    return render_template('errore.html')
+ # elif lstGioc[~lstGioc['Nome'].str.startswith(sceltagiocatore)]:
+  #  return render_template('errore.html')
   else:
     listaGioc= listaGioc[listaGioc['Nome'].str.startswith(sceltagiocatore.upper())]
 
@@ -180,7 +180,7 @@ def graficopng():
     
 @app.route("/mappa.png", methods=["GET"])
 def mappapng():
-    fig, ax = plt.subplots(figsize = (10,5))
+    fig, ax = plt.subplots(figsize = (8,4))
     com = comuni[comuni['COMUNE']==comune]
     com.to_crs(epsg=3857).plot(ax=ax, edgecolor="k", facecolor="red", alpha=0.4)
     contextily.add_basemap(ax=ax)   

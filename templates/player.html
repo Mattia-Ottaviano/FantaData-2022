@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoGiocatore</title>
-    <link rel="stylesheet" href="/static/styles/player.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InfoGiocatore</title>
+  <link rel="stylesheet" href="/static/styles/player.css">
 </head>
 
 <style>
-    table, th, td {
-      border:1px solid black;
-    }
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
 </style>
+
 <body>
-    
-    <h1 class="nome_gioc">{{nome}}</h1>                                              
-    
 
-    
-    <h1 class="squadra">{{squadra}}</h1>
-    <h1 class="ruolo">{{ruolo}}</h1>
+  <h1 class="nome_gioc">{{nome}}</h1>
 
 
-    
-    
 
-    <div class="table"></div>
-    <table>
+  <h1 class="ruolo">{{ruolo}}</h1>
+
+  <div class="content">
+    <div class="table">
+      <table>
 
 
         <tr>
@@ -39,30 +39,32 @@
           <th>Media</th>
           <th>FantaMedia</th>
         </tr>
-         <tr>
+        <tr>
           <td>{{pres}}</td>
-          <td>{{gol}}</td>  
-          <td>{{assist}}</td>  
-          <td>{{amm}}</td>  
-          <td>{{esp}}</td>  
-          <td>{{media}}</td>  
-          <td>{{fantamedia}}</td>    
+          <td>{{gol}}</td>
+          <td>{{assist}}</td>
+          <td>{{amm}}</td>
+          <td>{{esp}}</td>
+          <td>{{media}}</td>
+          <td>{{fantamedia}}</td>
 
-        </tr>    
-      
-    </table>
+        </tr>
+
+      </table>
     </div>
 
-    <div class="grafico"></div>
-      <img src="/grafico.png">
-    </div>
+    <div class="left">
+      <div class="grafico">
+        <img src="/grafico.png">
+      </div>
 
-    <div class="map"></div>
+    </div>
+    <div class="map">
+      <h1 class="squadra">{{squadra}}</h1>
       <img src="/mappa.png">
     </div>
-
+  </div>
 
 </body>
+
 </html>
-
-
