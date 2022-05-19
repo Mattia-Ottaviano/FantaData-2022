@@ -91,7 +91,11 @@ def selruolo():
   
   def convert(column):
     return '<a href="/workspace/FantaData-2022/{}">{}</a>'.format(column['Nome'],  column.Nome)
-  listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
+
+  try:
+    listaGioc['Nome'] = listaGioc.apply(convert, axis=1)
+  except ValueError:
+    return render_template('errore.html')
 
   return render_template("home.html", listaGioc = listaGioc.to_html(border=0, escape=False), squadre= elSquadre, criteri=criteri)
 

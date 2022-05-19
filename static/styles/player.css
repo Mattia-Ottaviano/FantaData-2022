@@ -4,6 +4,7 @@ body {
     background-repeat: no-repeat;
     font-family: sans-serif;
     color: white;
+    margin: 0;
 }
 
 .nome_gioc {
@@ -13,17 +14,15 @@ body {
 
 .titolo {
     text-align: center;
-    margin-top: 0
 }
 
-.ruolo {
-    position: absolute;
-    margin-top: 4.5%;
-    margin-left: 35%
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
-
-.table table{
+.table table {
     table-layout: fixed;
     width: 100%;
     margin-top: 12;
@@ -36,18 +35,13 @@ td {
 }
 
 
-.grafico img{
-    margin-top: 12%;
-    max-width: 40%;
+.grafico img {
+    width: 80%;
+    margin: 2% 10%;
 }
 
 
-.map {
-    margin-top: 5%;
-    margin-right: 35%;
-    max-width: 40%;
+.map img{
+    width: 80%;
+    margin: 2% 10%;
 }
-
-/* .left {
-    float: left;
-} */
