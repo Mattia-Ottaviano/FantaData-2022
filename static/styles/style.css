@@ -43,7 +43,21 @@ table {
 
 .filtri {
   margin-top:2.5%;
-  margin-left: 65%;
+  margin-left: 40%;
   position:fixed
+}
+
+.leg {
+  margin-top:29%;
+  margin-left: 40%;
+  position:fixed
+
+}
+
+.errore {
+  position: absolute;
+  top: 50%;
+  left: 33%;
+  margin: -20px 0 0 -20px
 }
 

@@ -1,1 +1,21 @@
 pip install flask geopandas pandas contextily openpyxl matplotlib
+
+
+
+
+
+
+
+LEGENDA:
+Cerca per nome ------> Inserisci il nome del calciatore da ricercare
+Seleziona Ruolo -----> Seleziona il ruolo dei giocatori che vuoi visualizzare
+Seleziona Squadra ---> Seleziona la squadra dei giocatori che vuoi visualizzare
+Ordina Per ----------> Seleziona il criterio con cui si riordinano i giocatori
+====================================================================================
+
+in "Seleziona Squadra" e "Ordina Per" il valore "-" non modifica i criteri di ricerca
+
+====================================================================================
+
+Avviata la ricerca, per visualizzare grafici e statistiche di un calciatore in modo più dettagliato:
+Cliccare il suo nome 

@@ -7,7 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/style.css">
-
+<style>
+.button {
+  background-color: rgb(255, 255, 255);
+  border: 3px solid rgba(71, 111, 221);
+  color: rgb(71, 111, 221);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 19px;
+  margin: 2px 1px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+</style>
 </head>
 
 <body>
@@ -27,26 +41,42 @@
 
     </div>
 
+    <div class="leg">
+        <h4>LEGENDA: <br>
+        Cerca per nome ------> Inserisci il nome del calciatore da ricercare <br>
+        Seleziona Ruolo -----> Seleziona il ruolo dei giocatori che vuoi visualizzare<br>
+        Seleziona Squadra ---> Seleziona la squadra dei giocatori che vuoi visualizzare<br>
+        Ordina Per ----------> Seleziona il criterio con cui si riordinano i giocatori<br>
+        ====================================================================================<br>
+
+        in "Seleziona Squadra" e "Ordina Per" il valore "-" non modifica i criteri di ricerca<br>
+
+        ====================================================================================<br>
+
+        Avviata la ricerca, per visualizzare grafici e statistiche di un calciatore in modo più dettagliato:<br>
+        Cliccare il suo nome 
+        </h4>
+    </div>
 
     <div class="filtri">
         <form action="/selruolo" method="GET">
 
          
 
-            <h4>Cerca per nome:</h4>
+            <h2>Cerca per nome:</h2>
             <input type="text" value="" name='calciatore'></input>
 
-            <h1>Seleziona Ruolo:</h1>
-            <input type="radio" name="scelta" value="AllRoles" required>Tutti
-            <input type="radio" name="scelta" value="P" required>P
-            <input type="radio" name="scelta" value="D" required>D
-            <input type="radio" name="scelta" value="C" required>C
-            <input type="radio" name="scelta" value="A" required>A
+            <h2>Seleziona Ruolo:</h2>
+            <input type="radio" name="scelta" value="AllRoles" checked>Tutti
+            <input type="radio" name="scelta" value="P" >P
+            <input type="radio" name="scelta" value="D" >D
+            <input type="radio" name="scelta" value="C" >C
+            <input type="radio" name="scelta" value="A" >A
 
 
             <h2>Seleziona Squadra: </h2>
-            <select name="squadra" required>
-                <option value="-">-</option>
+            <select name="squadra" >
+                <option value="-">----></option>
                 {% for squadra in squadre%}
                 <option value="{{squadra}}">{{squadra}}</option>
                 {%endfor%}
@@ -54,17 +84,18 @@
 
 
 
-            <h3>Seleziona Criterio d'ordine:</h3>
-            <select name="criterio" required>
-                <option value="-">-</option>
+            <h2>Seleziona Criterio d'ordine:</h2>
+            <select name="criterio" >
+                <option value="-">----></option>
                 {% for criterio in criteri%}
                 <option value="{{criterio}}">{{criterio}}</option>
                 {%endfor%}
             </select>
 
-            </br>
-
-            <input type="submit" name="Invio" value="Cerca" id="send">
+        
+            
+            <br><br><button class="button">Cerca</button>
+            
         </form>
         </div>
 
@@ -90,20 +121,6 @@
         e.style.backgroundColor = c
 
     }
-
-    // const send = document.getElementById("send");
-    // const radiobuttons = document.querySelectorAll('input[type="radio"]');
-    // const checked = document.querySelectorAll('input[type="radio"]:checked');
-
-    // send.disabled = checked.length > 0 ? false : true;
-
-    // radiobuttons.forEach(r => {
-    //     r.onclick = () => {
-    //         const checked = document.querySelectorAll('input[type="radio"]:checked');
-    //         send.disabled = checked.length > 0 ? false : true;
-    //     };
-    // });
-
 
 </script>
 
