@@ -159,7 +159,7 @@ def infogioc(giocatore):
 
 
   
-  return render_template("player.html", nome=giocatore, info_gioc=info_gioc.to_html(), squadra = squadra, ruolo= ruolo, pres=pres, gol =gol, assist= assist, amm = amm, esp= esp, media= media, fantamedia= fantamedia )
+  return render_template("player.html", comune=comune, nome=giocatore, info_gioc=info_gioc.to_html(), squadra = squadra, ruolo= ruolo, pres=pres, gol =gol, assist= assist, amm = amm, esp= esp, media= media, fantamedia= fantamedia )
 
 @app.route("/grafico.png", methods=["GET"])
 def graficopng():
