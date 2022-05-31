@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Errore!</title>
-    <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="stylesheet" href="./static/styles/style.css">
     <style>
-        .button {
+        input[type=submit]{
             background-color: rgb(255, 255, 255);
             border: 3px solid rgba(71, 111, 221);
             color: rgb(71, 111, 221);
@@ -23,23 +23,18 @@
             margin-left: 1%;
             position:fixed
                 }
-
-                
- 
-    
     </style>
 </head>
 
 
 <body>
     <h1 class="errore">La ricerca non ha prodotto alcun tipo di risultati!</h1>
+    <form action="/" method="GET">
+            <input type="submit" value="TORNA ALLA HOME">
+    </form>
 </body>
 
-<form>
-    <div class="button">
-    <input type="button" value="Torna alla HOME" onclick="history.go(-1)">
-    </div>
-</form>
+
 </html>
 
 
